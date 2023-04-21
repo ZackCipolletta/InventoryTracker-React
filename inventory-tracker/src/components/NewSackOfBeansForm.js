@@ -12,7 +12,6 @@ function NewSackOfBeansForm(props) {
       origin: event.target.origin.value,
       price: event.target.price.value,
       roast: event.target.roast.value,
-      amount: event.target.amount.value,
       id: v4()
     });
   }
