@@ -1,5 +1,6 @@
 import React from "react";
 import Coffee from "./Coffee";
+import CoffeeList from "./CoffeeList";
 
 class CoffeeControl extends React.Component {
 
@@ -15,6 +16,7 @@ class CoffeeControl extends React.Component {
 
     return (
       <React.Fragment>
+        <CoffeeList />
         <Coffee />
       </React.Fragment>
     );
