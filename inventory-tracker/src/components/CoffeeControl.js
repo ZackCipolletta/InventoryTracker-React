@@ -1,4 +1,5 @@
 import React from "react";
+import Coffee from "./Coffee";
 
 class CoffeeControl extends React.Component {
 
@@ -10,9 +11,14 @@ class CoffeeControl extends React.Component {
   }
 
 
+  render() {
 
-
-
+    return (
+      <React.Fragment>
+        <Coffee />
+      </React.Fragment>
+    );
+  }
 }
 
 export default CoffeeControl;
