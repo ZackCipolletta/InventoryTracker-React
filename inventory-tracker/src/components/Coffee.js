@@ -10,6 +10,7 @@ function Coffee(props) {
       <p><span>Origin: {props.origin}</span></p>
       <p><span>price: ${props.price}</span></p>
       <p><span>roast: {props.roast}</span></p>
+      {/* {props.amount <= 100 ? <p>Oh no we're out!</p> : null} */}
       <button onClick={() => props.whenCoffeeSold(props.id)}>Sell coffee</button>
     </React.Fragment>
   );
