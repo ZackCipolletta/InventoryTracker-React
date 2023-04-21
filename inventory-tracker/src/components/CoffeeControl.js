@@ -1,7 +1,7 @@
 import React from "react";
 import CoffeeList from "./CoffeeList";
-import NewForm from "./NewForm";
 import NewSackOfBeansForm from "./NewSackOfBeansForm";
+import CoffeeDetails from "./CoffeeDetails";
 
 class CoffeeControl extends React.Component {
 
@@ -13,6 +13,22 @@ class CoffeeControl extends React.Component {
     };
   }
 
+  handleChangingSelectedCoffee = (id) => {
+    const selectedCoffee = this.state.coffeeList.filter(coffee => coffee.id === id)[0];
+    console.log("coffee clicked id:" + id);
+    console.log(selectedCoffee);
+    this.setState({ selectedCoffee: selectedCoffee });
+  };
+
+  handleCoffeeSale = (id) => {
+    const updatedCoffeeList = this.state.coffeeList.filter((obj) => obj.id !== id);
+    const coffeeSold = this.state.coffeeList.filter(coffee => coffee.id === id)[0];
+    const soldIndex = this.state.coffeeList.indexOf(coffeeSold);
+    coffeeSold.amount -= 1;
+    updatedCoffeeList.splice(soldIndex, 0, coffeeSold);
+
+  }
+
   handleAddingNewSackOfBeansToList = (newSackOfBeans) => {
     const newCoffeeList = this.state.coffeeList.concat(newSackOfBeans);
     this.setState({
@@ -22,9 +38,10 @@ class CoffeeControl extends React.Component {
   };
 
   handleClick = () => {
-    if (!this.state.addNewFormVisible) {
+    if (this.state.selectedCoffee !=null) {
       this.setState({
-        addNewFormVisible: true
+        addNewFormVisible: false,
+        selectedCoffee: null
       });
     } else {
       this.setState(prevState => ({
@@ -33,17 +50,33 @@ class CoffeeControl extends React.Component {
     }
   };
 
+  handleDeleteCoffee = (id) => {
+    const updatedCoffeeList = this.state.coffeeList.filter((obj) => obj.id !== id);
+    this.setState({
+      coffeeList: updatedCoffeeList,
+      selectedCoffee: null
+    });
+  };
+
+
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if (this.state.addNewFormVisible) {
-      console.log("button clicked, new form called");
+    if (this.state.selectedCoffee != null) {
+      currentlyVisibleState = <CoffeeDetails coffee={this.state.selectedCoffee}
+        onDeleteCoffee={this.handleDeleteCoffee} />
+      buttonText = "Return to Coffee List";
+    }
+    else if (this.state.addNewFormVisible) {
       currentlyVisibleState = <NewSackOfBeansForm onNewSackOfBeansCreation={this.handleAddingNewSackOfBeansToList} />;
       buttonText = "Return to Coffee List";
     }
     else {
-      currentlyVisibleState = <CoffeeList coffeeList={this.state.coffeeList}
+      currentlyVisibleState = <CoffeeList
+        coffeeList={this.state.coffeeList}
+        onCoffeeSelection={this.handleChangingSelectedCoffee}
+        onCoffeeSale={this.handleCoffeeSale}
       />;
       buttonText = "Add Sack of Beans";
     }

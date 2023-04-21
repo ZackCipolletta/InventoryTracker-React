@@ -10,8 +10,9 @@ function NewSackOfBeansForm(props) {
     props.onNewSackOfBeansCreation({
       name: event.target.name.value,
       origin: event.target.origin.value,
-      price: event.target.price.value,
+      price: parseInt(event.target.price.value),
       roast: event.target.roast.value,
+      amount: 130,
       id: v4()
     });
   }
