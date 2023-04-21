@@ -1,6 +1,6 @@
 import React from "react";
-import Coffee from "./Coffee";
 import CoffeeList from "./CoffeeList";
+import NewForm from "./NewForm";
 import NewSackOfBeansForm from "./NewSackOfBeansForm";
 
 class CoffeeControl extends React.Component {
@@ -38,12 +38,13 @@ class CoffeeControl extends React.Component {
     let buttonText = null;
 
     if (this.state.addNewFormVisible) {
-      console.log("button clicked, new form called")
+      console.log("button clicked, new form called");
       currentlyVisibleState = <NewSackOfBeansForm onNewSackOfBeansCreation={this.handleAddingNewSackOfBeansToList} />;
       buttonText = "Return to Coffee List";
     }
     else {
-      currentlyVisibleState = <CoffeeList />;
+      currentlyVisibleState = <CoffeeList coffeeList={this.state.coffeeList}
+      />;
       buttonText = "Add Sack of Beans";
     }
 

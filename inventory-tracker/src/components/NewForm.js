@@ -1,44 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function ProductForm(props) {
+function NewForm(props) {
   return (
-    <React.Form>
+    <React.Fragment>
       <form onSubmit={props.formSubmissionHandler}>
         <input
           type='text'
           name='name'
-          placeholder="Name"
-        />
+          placeholder="Name" />
         <input
           type='text'
           name='origin'
-          placeholder="Origin"
-        />
+          placeholder="Origin" />
         <input
           type='number'
           name='price'
-          placeholder="Price"
-        />
+          placeholder="Price" />
         <input
           type='text'
           name='roast'
-          placeholder="Roast"
-        />
-        <input
-          type='number'
-          name='amount'
-          placeholder="Amount"
-        />
+          placeholder="Roast" />
         <button type='submit'>{props.buttonText}</button>
       </form>
-    </React.Form>
-  )
+    </React.Fragment>
+  );
 }
 
-ProductForm.propTypes = {
+NewForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
   buttonText: PropTypes.string
 };
 
-export default ProductForm;
+export default NewForm;

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { v4 } from 'uuid';
-import ProductForm from "./ProductForm";
+import NewForm from "./NewForm";
 
 function NewSackOfBeansForm(props) {
 
@@ -20,10 +20,9 @@ function NewSackOfBeansForm(props) {
   return (
     <React.Fragment>
       <h1>Add New Sack of beans:</h1>
-      <ProductForm
+      <NewForm
         formSubmissionHandler={handleNewSackOfBeansFormSubmission}
-        buttonText={"Add New Sack of Beans"}
-      />
+        buttonText={"Add"} />
     </React.Fragment>
   )
 };

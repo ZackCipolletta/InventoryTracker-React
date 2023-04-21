@@ -21,5 +21,4 @@ Coffee.propTypes = {
   roast: PropTypes.string
 }
 
-
 export default Coffee;
