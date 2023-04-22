@@ -2,6 +2,7 @@ import React from "react";
 import CoffeeList from "./CoffeeList";
 import NewSackOfBeansForm from "./NewSackOfBeansForm";
 import CoffeeDetails from "./CoffeeDetails";
+import EditSackOfBeansForm from "./EditSackOfBeansForm";
 
 class CoffeeControl extends React.Component {
 
@@ -9,7 +10,8 @@ class CoffeeControl extends React.Component {
     super(props);
     this.state = {
       addNewFormVisible: false,
-      coffeeList: []
+      coffeeList: [],
+      editingCoffee: false
     };
   }
 
@@ -58,14 +60,36 @@ class CoffeeControl extends React.Component {
     });
   };
 
+  handleEditingCoffeeList = (coffeeToBeEdited) => {
+    const editedCoffeeList = this.state.coffeeList
+      .filter((obj) => obj.id !== this.state.selectedCoffee.id)
+      .concat(coffeeToBeEdited);
+    this.setState({
+      coffeeList: editedCoffeeList,
+      editingCoffee: false,
+      selectedCoffee: null
+    })
+  }
+
+  handleEditClick = () => {
+    console.log("handleEditClick reached!")
+    this.setState({ editingCoffee: true });
+  }
 
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if (this.state.selectedCoffee != null) {
+    if (this.state.editingCoffee) {
+      currentlyVisibleState = <EditSackOfBeansForm coffee={this.state.selectedCoffee}
+        onEditCoffee={this.handleEditingCoffeeList} />
+      buttonText="Return to Coffee List"
+    }
+    else if (this.state.selectedCoffee != null) {
       currentlyVisibleState = <CoffeeDetails coffee={this.state.selectedCoffee}
-        onDeleteCoffee={this.handleDeleteCoffee} />
+        onDeleteCoffee={this.handleDeleteCoffee}
+        onClickingEdit={this.handleEditClick} // this allows the program to listen for a call to the handleEditClick method inside the CoffeeDetails component. When a user clicks the right button inside the CoffeeDetails component, this will call the handleEditClick method here in CoffeeControl. The method will then update state.editingCoffee to true, which will then call for the EditSackOfBeansForm component to be displayed.
+        />
       buttonText = "Return to Coffee List";
     }
     else if (this.state.addNewFormVisible) {

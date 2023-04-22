@@ -14,6 +14,7 @@ function CoffeeDetails(props) {
       <p><span>amount: {coffee.amount}lbs</span></p>
 
       <button onClick={() => onDeleteCoffee(coffee.id)}>Delete this Coffee</button>
+      <button onClick={() => props.onClickingEdit(coffee.id)}>Edit this sack of beans</button>
     </React.Fragment>
   )
 }
