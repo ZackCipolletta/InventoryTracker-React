@@ -12,7 +12,7 @@ function EditSackOfBeansForm(props) {
       origin: event.target.origin.value,
       price: parseInt(event.target.price.value),
       roast: event.target.roast.value,
-      amount: coffee.amount,
+      amount: parseInt(event.target.amount.value),
       id: coffee.id
     });
   }
@@ -21,7 +21,14 @@ function EditSackOfBeansForm(props) {
     <React.Fragment>
       <NewForm
         formSubmissionHandler={handleEditSackOfBeansFormSubmission}
-        buttonText="Update Coffee" />
+        buttonText="Update Coffee"
+        name={coffee.name}
+        origin={coffee.origin}
+        price={coffee.price}
+        roast={coffee.roast}
+        showAmount={true}
+        amount={coffee.amount}
+      />
     </React.Fragment>
   );
 }

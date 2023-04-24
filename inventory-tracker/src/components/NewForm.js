@@ -2,25 +2,39 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function NewForm(props) {
+
+  const { name, origin, price, roast, amount } = props;
+
   return (
     <React.Fragment>
       <form onSubmit={props.formSubmissionHandler}>
         <input
           type='text'
           name='name'
-          placeholder="Name" />
+          placeholder="Name"
+          defaultValue={name} />
         <input
           type='text'
           name='origin'
-          placeholder="Origin" />
+          placeholder="Origin"
+          defaultValue={origin} />
         <input
           type='number'
           name='price'
-          placeholder="Price" />
+          placeholder="Price"
+          defaultValue={price} />
         <input
           type='text'
           name='roast'
-          placeholder="Roast" />
+          placeholder="Roast"
+          defaultValue={roast} />
+        {props.showAmount && (
+          <input
+            type='number'
+            name='amount'
+            placeholder="Amount"
+            defaultValue={amount} />
+        )}
         <button type='submit'>{props.buttonText}</button>
       </form>
     </React.Fragment>
@@ -29,7 +43,12 @@ function NewForm(props) {
 
 NewForm.propTypes = {
   formSubmissionHandler: PropTypes.func,
-  buttonText: PropTypes.string
+  buttonText: PropTypes.string,
+  name: PropTypes.string,
+  origin: PropTypes.string,
+  price: PropTypes.number,
+  roast: PropTypes.string,
+  amount: PropTypes.number,
 };
 
 export default NewForm;
